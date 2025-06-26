@@ -1,0 +1,9 @@
+# Ignore environment file
+.env
+
+# Ignore build artifacts
+/target
+Cargo.lock
+
+.env.local
+.env.production
