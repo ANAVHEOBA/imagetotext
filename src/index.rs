@@ -12,7 +12,7 @@ pub static START_TIME: once_cell::sync::Lazy<Arc<Instant>> =
 pub async fn start_server() -> std::io::Result<()> {
     let config = Config::new();
     let port = std::env::var("PORT").unwrap_or_else(|_| "8080".to_string());
-    let address = format!("127.0.0.1:{}", port);
+    let address = format!("0.0.0.0:{}", port);
     
     println!("Server starting on http://{}", address);
     
