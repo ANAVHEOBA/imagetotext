@@ -1,8 +1,9 @@
 services:
   - type: web
     name: imagetotext
-    env: docker
-    dockerfilePath: ./Dockerfile
+    env: rust
+    buildCommand: "cargo build --release"
+    startCommand: "./target/release/imagetotext"
     envVars:
-      - key: PORT
-        value: 8080 
+      - key: RUST_LOG
+        value: info 
