@@ -1,16 +1,8 @@
 services:
   - type: web
     name: imagetotext
-    env: rust
-    buildPacks:
-      - type: apt
-        packages: build-essential pkg-config libleptonica-dev tesseract-ocr libtesseract-dev
-    buildCommand: "cargo build --release"
-    startCommand: "./target/release/imagetotext"
+    env: docker
+    dockerfilePath: ./Dockerfile
     envVars:
-      - key: PKG_CONFIG_PATH
-        value: /usr/lib/x86_64-linux-gnu/pkgconfig
-      - key: RUST_LOG
-        value: info
-      - key: RENDER
-        value: "true" 
+      - key: PORT
+        value: 8080 
