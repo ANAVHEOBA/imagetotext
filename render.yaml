@@ -2,8 +2,11 @@ services:
   - type: web
     name: imagetotext
     env: rust
-    buildCommand: cargo build --release
-    startCommand: ./target/release/imagetotext
+    buildPacks:
+      - type: apt
+        packages: build-essential pkg-config libleptonica-dev tesseract-ocr libtesseract-dev
+    buildCommand: "cargo build --release"
+    startCommand: "./target/release/imagetotext"
     envVars:
       - key: RUST_LOG
         value: info
