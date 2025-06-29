@@ -5,6 +5,8 @@ use tokio::sync::OnceCell;
 
 use crate::modules::user::model::User;
 use crate::modules::conversion::model::Conversion;
+use crate::modules::sync::model::Project;
+use crate::modules::editor::model::Preview;
 use crate::config::environment::Config;
 
 static DB_INSTANCE: OnceCell<Arc<Database>> = OnceCell::const_new();
@@ -44,6 +46,15 @@ async fn get_db() -> Arc<Database> {
             .await
             .expect("Failed to create user_id index");
 
+        // Create indices for projects collection
+        let projects_collection: Collection<Project> = db.collection("projects");
+        let project_user_id_index = IndexModel::builder()
+            .keys(doc! { "user_id": 1 })
+            .build();
+        projects_collection.create_index(project_user_id_index)
+            .await
+            .expect("Failed to create project user_id index");
+
         Arc::new(db)
     })
     .await
@@ -58,4 +69,14 @@ pub async fn get_users_collection() -> mongodb::error::Result<Collection<User>> 
 pub async fn get_conversion_collection() -> mongodb::error::Result<Collection<Conversion>> {
     let db = get_db().await;
     Ok(db.collection("conversions"))
+}
+
+pub async fn get_projects_collection() -> mongodb::error::Result<Collection<Project>> {
+    let db = get_db().await;
+    Ok(db.collection("projects"))
+}
+
+pub async fn get_previews_collection() -> mongodb::error::Result<Collection<Preview>> {
+    let db = get_db().await;
+    Ok(db.collection("previews"))
 }

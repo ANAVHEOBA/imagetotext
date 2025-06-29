@@ -58,6 +58,7 @@ pub struct ValidationErrorResponse {
 
 // File upload constraints
 pub const MAX_FILE_SIZE: u64 = 5 * 1024 * 1024; // 5 MB
+#[allow(dead_code)]
 pub const ALLOWED_MIME_TYPES: [&str; 4] = [
     "image/jpeg",
     "image/jpg", 

@@ -4,7 +4,7 @@ use chrono::{DateTime, Utc};
 use std::time::Duration;
 
 use crate::index::START_TIME;
-use crate::modules::{configure_routes, configure_conversion_routes};
+use crate::modules::{user::route::configure_routes, conversion::route::configure_conversion_routes, sync::route::configure_sync_routes, editor::route::configure_editor_routes};
 
 #[derive(Serialize)]
 struct HealthResponse {
@@ -21,6 +21,8 @@ pub fn config_app(app: &mut web::ServiceConfig) {
             .route("/health", web::get().to(health_check))
             .configure(configure_routes)
             .configure(configure_conversion_routes)
+            .configure(configure_sync_routes)
+            .configure(configure_editor_routes)
     );
 }
 

@@ -114,7 +114,7 @@ impl User {
         }
         false
     }
-
+    #[allow(dead_code)]
     pub fn set_refresh_token(&mut self, token: String) {
         self.refresh_token = Some(token);
         
@@ -122,13 +122,13 @@ impl User {
         self.refresh_token_expires_at = Some(DateTime::from_millis(expires_at));
         self.updated_at = DateTime::now();
     }
-
+    #[allow(dead_code)]
     pub fn clear_refresh_token(&mut self) {
         self.refresh_token = None;
         self.refresh_token_expires_at = None;
         self.updated_at = DateTime::now();
     }
-
+    #[allow(dead_code)]
     pub fn validate_refresh_token(&self, token: &str) -> bool {
         if let (Some(stored_token), Some(expires_at)) = (&self.refresh_token, self.refresh_token_expires_at) {
             stored_token == token && expires_at > DateTime::now()

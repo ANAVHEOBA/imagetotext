@@ -152,3 +152,87 @@ a@a:~/imagetotext$ curl -X GET http://localhost:8080/api/conversion/7c39f32c-153
                                  Dload  Upload   Total   Spent    Left  Speed
 100 10426  100 10426    0     0   5708      0  0:00:01  0:00:01 --:--:--  5706
 a@a:~/imagetotext$ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Upload an image with standard text recognition:
+
+
+         POST /api/conversion/upload
+
+
+
+Upload an image with handwriting recognition:
+
+
+
+POST /api/conversion/upload?recognition_type=Handwritten
+
+
+       
+
+
+Edit OCR Results:
+
+       POST /api/conversion/{job_id}/edit
+Content-Type: application/json
+
+{
+    "new_content": "Edited LaTeX content"
+}
+
+
+
+
+
+Get Real-time Preview:
+
+
+POST /api/conversion/preview
+Content-Type: application/json
+
+{
+    "content": "Your LaTeX content",
+    "format": "LaTeX"  // or "Word" or "Math"
+}
+
+
+
+
+View Edit History:
+
+
+GET /api/conversion/{job_id}/history
+
+
+
+
+
+GET /api/conversion/{job_id}/download/{format}
+
+       latex, mathml, docx, markdown, html, plaintext, odt, pdf
+
+Copy to clipboard:
+
+      POST /api/conversion/{job_id}/clipboard
+Content-Type: application/json
+
+{
+    "format": "latex" // or any other supported format
+}

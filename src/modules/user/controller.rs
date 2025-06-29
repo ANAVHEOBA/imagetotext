@@ -148,7 +148,7 @@ impl UserController {
 
         // Authenticate user
         match authenticate_user(email, password).await {
-            Ok(Some(mut user)) => {
+            Ok(Some(user)) => {
                 // Check if the user's email is verified
                 if !user.is_verified {
                     return Ok(HttpResponse::Forbidden().json(ErrorResponse {

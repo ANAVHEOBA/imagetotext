@@ -1,6 +1,7 @@
 use std::env;
 
 #[derive(Clone)]
+#[allow(dead_code)]
 pub struct Config {
     pub jwt_secret: String,
     pub mongodb_uri: String,
@@ -47,11 +48,11 @@ impl Config {
             frontend_url,
         }
     }
-
+    #[allow(dead_code)]
     pub fn is_production(&self) -> bool {
         self.environment == "production"
     }
-
+    #[allow(dead_code)]
     pub fn is_development(&self) -> bool {
         self.environment == "development"
     }

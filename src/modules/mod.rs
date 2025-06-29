@@ -3,10 +3,9 @@
 
 pub mod user;
 pub mod conversion;
+pub mod sync;
+pub mod editor;
 
 // Re-export key components for convenience
-pub use user::route::configure_routes;
 pub use user::crud::UserCRUD;
 pub use user::schema::ErrorResponse;
-
-pub use conversion::route::configure_conversion_routes;
