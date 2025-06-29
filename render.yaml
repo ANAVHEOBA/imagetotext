@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: imagetotext
+    env: rust
+    buildCommand: |
+      # Install system dependencies
+      apt-get update -y
+      apt-get install -y pkg-config
+      apt-get install -y libleptonica-dev
+      apt-get install -y tesseract-ocr
+      apt-get install -y libtesseract-dev
+      # Build the Rust application
+      cargo build --release
+    startCommand: ./target/release/imagetotext
+    envVars:
+      - key: RUST_LOG
+        value: info 
