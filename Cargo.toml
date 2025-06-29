@@ -4,7 +4,6 @@ version = "0.1.0"
 edition = "2024"
 default-run = "imagetotext"
 build = "build.rs"
-links = "lept"
 
 [dependencies]
 actix-web = "4.11.0"
