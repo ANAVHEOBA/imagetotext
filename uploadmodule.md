@@ -170,3 +170,22 @@ a@a:~/imagetotext$
 
 
 
+
+
+
+new 
+
+   a@a:~/imagetotext$ curl -X POST http://localhost:8080/api/conversion/upload \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0NmNmODJlMi04M2EwLTQ4NDQtODAzMC0zYTlmYjRiODRkODkiLCJlbWFpbCI6Indpc2RvbWFicmFoYW05MkBnbWFpbC5jb20iLCJleHAiOjE3NTE0NDUxNjksImlhdCI6MTc1MTM1ODc2OSwiYWNjb3VudF90eXBlIjoiSW5kaXZpZHVhbCJ9.fbopeMpdFev_KRvTYfioZAaIs2zQ5NI-dYxljX0Ml8k" \
+  -F "file=@hjjjj.png"
+{"job_id":"ff4984f2-c7a6-4af3-a67b-68a6dc2a3450","message":"Image processed and uploaded successfully.","status":"completed"}a@a:~/imagetotext$ 
+
+
+a@a:~/imagetotext$ curl -X GET http://localhost:8080/api/conversion/ff4984f2-c7a6-4af3-a67b-68a6dc2a3450 \
+  -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0NmNmODJlMi04M2EwLTQ4NDQtODAzMC0zYTlmYjRiODRkODkiLCJlbWFpbCI6Indpc2RvbWFicmFoYW05MkBnbWFpbC5jb20iLCJleHAiOjE3NTE0NDUxNjksImlhdCI6MTc1MTM1ODc2OSwiYWNjb3VudF90eXBlIjoiSW5kaXZpZHVhbCJ9.fbopeMpdFev_KRvTYfioZAaIs2zQ5NI-dYxljX0Ml8k"
+{"job_id":"ff4984f2-c7a6-4af3-a67b-68a6dc2a3450","status":"completed","original_filename":"hjjjj.png","extracted_text":"Example 1. Evaluate \\(\\lim_{y \\to 0} \\frac{x^2 y}{x^4 + y^2}\\).\n\nSolution.\n(i) \\(\\lim_{y \\to 0} \\frac{x^2 y}{x^4 + y^2} = \\lim_{y \\to 0} \\frac{0}{0 + y^2} = 0 = f_1\\) (say)\n\n(ii) \\(\\lim_{y \\to 0} \\frac{x^2 y}{x^4 + y^2} = \\lim_{x \\to 0} \\frac{0}{x^4 + 0} = 0 = f_2\\) (say)\n\nHere, \\(f_1 = f_2\\), therefore\n\n(iii) Put \\(y = mx\\)\n\n\\(\\lim_{x \\to 0} \\frac{x^2 mx}{x^4 + m^2 x^2} = \\lim_{x \\to 0} \\frac{mx}{x^2 + m^2} = 0 = f_3\\) (say)\n\nHere, \\(f_1 = f_2 = f_3\\), therefore\n\n(iv) Put \\(y = mx^2\\)\n\n\\(\\lim_{x \\to 0} \\frac{x^2 mx^2}{x^4 + m^2 x^4} = \\lim_{x \\to 0} \\frac{m}{1 + m^2} = \\frac{m}{1 + m^2} = f_4\\)\n\nHere, \\(f_1 = f_2 = f_3 \\neq f_4\\)\n\nThus, limit does not exist.\n\nAns.\n\nExample 2. Evaluate \\(\\lim_{y \\to 0} (x^3 + y^3)\\).\n\nSolution.\n(i) \\(\\lim_{y \\to 0} (x^3 + y^3) = \\lim_{y \\to 0} (0 + y^3) = 0 = f_1\\) (say)\n\n(ii) \\(\\lim_{y \\to 0} (x^3 + y^3) = \\lim_{x \\to 0} (x^3 + 0) = 0 = f_2\\) (say)\n\nHere, \\(f_1 = f_2\\), therefore\n\n(iii) Put \\(y = mx\\)\n\n\\(\\lim_{x \\to 0} (x^3 + y^3) = \\lim_{x \\to 0} \\left[ \\lim_{y \\to 0} (x^3 + y^3) \\right] = \\lim_{x \\to 0} (x^3 + m^3 x^3) = 0 = f_3\\) (say)\n\nHere, \\(f_1 = f_2 = f_3\\), therefore\n\n(iv) Put \\(y = mx^2\\)\n\n\\(\\lim_{x \\to 0} (x^3 + y^3) = \\lim_{x \\to 0} \\left[ \\lim_{y \\to 0} (x^3 + y^3) \\right] = \\lim_{x \\to 0} (x^3 + m^3 x^6) = 0 = f_4\\)\n\nHere, \\(f_1 = f_2 = f_3 = f_4\\)\n\nThus, limit exists with value 0.\n\nAns.","created_at":"2025-07-01 8:34:03.389 +00:00:00","processing_time_ms":29412}a@a:~/imagetotext$ 
+
+
+
+
+

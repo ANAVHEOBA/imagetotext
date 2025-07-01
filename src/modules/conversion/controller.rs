@@ -159,55 +159,25 @@ impl ConversionController {
             
             let api_key = &config.open_router_api_key;
             let model_name = "qwen/qwen-vl-plus";
-            let prompt_text = "You are an expert in both handwritten and printed mathematical notation, as well as a LaTeX specialist. Your task is to accurately transcribe all content from the provided image, handling both handwritten and printed text with equal expertise.
+            let prompt_text = "You are an expert mathematician and a LaTeX specialist. Your task is to accurately transcribe all text and mathematical expressions from the provided image.
 
-**CRITICAL INSTRUCTIONS:**
-1.  **Content Recognition:**
-    * Detect and process both handwritten and printed content
-    * Pay special attention to handwritten mathematical symbols
-    * Handle mixed content (combinations of handwritten and printed)
-    * For ambiguous handwritten symbols, choose the most likely interpretation based on context
-
-2.  **Validate and Correct:** 
-    * Do not just blindly transcribe. Interpret the content intelligently.
-    * For handwritten content, use mathematical context to resolve ambiguities
-    * If a symbol is unclear, use surrounding context to infer the most likely meaning
-    * Your goal is to produce semantically sound mathematics
-    * For very ambiguous handwriting, provide the most likely interpretation
-
-3.  **Table Detection and Processing:**
-    * Identify and preserve table structures (both handwritten and printed)
-    * Detect table boundaries, headers, and merged cells
-    * Convert tables to LaTeX tabular format
-    * Maintain column alignments (left, center, right)
-    * Preserve cell content formatting (text, math, numbers)
-    * Handle mixed handwritten/printed content within tables
-
-4.  **Strict Formatting:** Adhere to the following formatting rules without exception.
-    *   **Math Delimiters:** Use ONLY `$...$` for inline math and `$$...$$` for display/block math
-    *   **Table Environment:** Use `\\begin{tabular}` with appropriate alignment specifiers
-    *   **No Structural LaTeX:** Do NOT use commands like `\\textbf`, `\\textit`, `\\section`, `\\begin{itemize}`, etc.
-    *   **No Code Blocks:** The entire output must be plain text. Do NOT wrap it in Markdown code blocks (```)
-    *   **Plain Lists:** For lists, use simple numbering like `1.`, `2.`, or plain hyphens `-`
-
-**Example of Correct Output with Mixed Content:**
-Here is some handwritten text with an inline formula $f(x) = x^2 + 1$ followed by a mixed table:
-
-\\begin{tabular}{|l|c|r|}
-\\hline
-Handwritten & Printed & Mixed \\\\
-\\hline
-$\\alpha$ & $\\beta$ & $\\gamma$ \\\\
-$\\int_0^1$ & $\\sum_{i=1}^n$ & $\\frac{dx}{dy}$ \\\\
-\\hline
-\\end{tabular}
-
-1. A handwritten equation in display mode:
-$$ \\int_a^b g(t) dt = G(b) - G(a) $$
-2. Mixed content example with $\\pi r^2$ in the text.
-
-**Your Goal:** Return ONLY the clean, corrected, and properly formatted transcription from the image. Handle both handwritten and printed content with high accuracy, ensuring proper LaTeX formatting for all mathematical expressions and tables.";
-
+            **CRITICAL INSTRUCTIONS:**
+            1.  **Validate and Correct:** Do not just blindly transcribe. Interpret the content. If a mathematical expression seems syntactically incorrect or a symbol is ambiguous, infer the most likely correct version. Your goal is to produce semantically sound mathematics.
+            2.  **Strict Formatting:** Adhere to the following formatting rules without exception.
+                *   **Math Delimiters:** Use ONLY `$...$` for inline math and `$$...$$` for display/block math.
+                *   **No Structural LaTeX:** Do NOT use commands like `\\textbf`, `\\textit`, `\\section`, `\\begin{itemize}`, etc. Use plain text for emphasis and structure.
+                *   **No Code Blocks:** The entire output must be plain text. Do NOT wrap it in Markdown code blocks (```).
+                *   **Plain Lists:** For lists, use simple numbering like `1.`, `2.`, or plain hyphens `-`.
+            
+            **Example of Correct Output:**
+            Here is some text with an inline formula $f(x) = x^2 + 1$.
+            
+            1. A list item with a display formula:
+            $$ \\int_a^b g(t) dt = G(b) - G(a) $$
+            2. Another list item.
+            
+            **Your Goal:** Return ONLY the clean, corrected, and properly formatted transcription from the image.";
+            
             let request_body = QwenRequestBody {
                 model: model_name,
                 messages: vec![QwenMessage {
